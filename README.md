@@ -1,2 +1,4 @@
-# web-425
-Repository for work in WEB 425
+# WEB 425 Angular with TypeScript
+## Contributors
+- Richard Krasso
+- Brandon Salvemini
