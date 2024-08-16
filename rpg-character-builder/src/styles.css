@@ -1,1 +1,109 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Exo:ital,wght@0,100..900;1,100..900&family=MedievalSharp&family=Moderustic:wght@300..800&display=swap');
+
+/* CSS Reset */
+body,
+header,
+nav,
+main,
+section,
+footer,
+img,
+figure,
+figcaption,
+div,
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Moderustic", sans-serif;
+  color: #287ebb;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+  width: 75%;
+  background-color: #bb6528;
+  color: #000000;
+}
+
+.banner {
+  background-color: #bb6528;
+  text-align: center;
+}
+
+.banner > h1 {
+  font-family: "MedievalSharp", cursive;
+  color: #ffebcd;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  background-color: #fff;
+}
+
+.navbar {
+  flex: 0 0 200px;
+  background-color: #bb6528;
+  text-align: center;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  padding: 8px;
+  font-family: "Exo", sans-serif;
+}
+
+.navbar li:hover {
+  font-size: larger;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  font-family: "EB Garamond", serif;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-family: "Exo", sans-serif;
+
+}
+
+.footer a {
+  text-decoration: none;
+  padding: 15px;
+  color: inherit;
+
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
