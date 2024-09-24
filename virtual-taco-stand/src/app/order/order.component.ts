@@ -12,14 +12,15 @@ export interface Order {
   orderId: number;
 }
 
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OrderSummaryComponent } from "../order-summary/order-summary.component";
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, OrderSummaryComponent],
   template: `
     <div class="order-form-container">
       <form
@@ -84,32 +85,7 @@ import { CommonModule } from '@angular/common';
       </form>
 
       <div class="order-summary">
-        <h1>Order Summary</h1>
-
-        @if (order.tacos.length > 0) {
-        <ul>
-          @for (taco of order.tacos; track taco) {
-          <li>
-            <strong>{{ taco.quantity }}x {{ taco.name }}</strong>
-            <br />
-            Price per taco:
-            {{ taco.price | currency : 'USD' : 'symbol' : '1.2-2' }}
-            <br />
-            @if (taco.noOnions) { No onions
-            <br />
-            } @if (taco.noCilantro) { No cilantro
-            <br />
-            }
-          </li>
-          }
-        </ul>
-        <p>
-          <strong>Total:</strong>
-          {{ getTotal() | currency : 'USD' : 'symbol' : '1.2-2' }}
-        </p>
-        } @else {
-        <p>No tacos added to the order yet.</p>
-        }
+        <app-order-summary [order]="order"></app-order-summary>
       </div>
 
     </div>
@@ -190,6 +166,8 @@ export class OrderComponent {
   noOnions: boolean = false;
   noCilantro: boolean = false;
   orderTotal: number;
+
+  @Output() orderUpdated = new EventEmitter<Order>();
 
   constructor() {
     this.tacos = [
