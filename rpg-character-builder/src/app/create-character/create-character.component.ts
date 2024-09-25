@@ -6,13 +6,14 @@ export interface Character {
   class: string;
 }
 
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CharacterListComponent } from '../character-list/character-list.component';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CharacterListComponent],
   template: `
     <div class="character-form-container">
       <h1>Character Creation</h1>
@@ -61,36 +62,12 @@ import { FormsModule, NgForm } from '@angular/forms';
       </form>
 
       <div class="character-display">
-        <h2>Created Characters</h2>
-        @if (characters.length > 0) {
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Class</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (character of characters; track character) {
-            <tr>
-              <td>{{ character.name }}</td>
-              <td>{{ character.gender }}</td>
-              <td>{{ character.class }}</td>
-            </tr>
-            }
-          </tbody>
-        </table>
-        } @else {
-        <p>No characters have been created yet</p>
-        }
+        <app-character-list [characters]="characters"></app-character-list>
       </div>
     </div>
   `,
   styles: [
     `
-      /* styles for form */
-
       .character-form {
         border: 3px solid #bb6528;
         padding: 0 10px 10px 10px;
@@ -115,33 +92,6 @@ import { FormsModule, NgForm } from '@angular/forms';
       input[type='submit']:hover {
         background-color: #6fdc6f;
       }
-
-      /* styles for table */
-
-      table {
-        border: 1px solid #bb6528;
-        border-collapse: collapse;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      th,
-      td {
-        border: 1px solid #bb6528;
-      }
-
-      td {
-        text-align: center;
-      }
-
-      th {
-        background-color: #bb6528;
-        color: #fff;
-      }
-
-      tr:nth-child(even) {
-        background-color: #ffebcd;
-      }
     `,
   ],
 })
@@ -151,6 +101,8 @@ export class CreateCharacterComponent {
   name: string = '';
   gender: string = '';
   class: string = '';
+
+  @Output() charactersUpdated = new EventEmitter<Character>();
 
   constructor() {
     this.characters = [];
